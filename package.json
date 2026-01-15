@@ -1,0 +1,25 @@
+{
+  "name": "relay-learning",
+  "version": "1.0.0",
+  "description": "12-week React Relay mastery learning plan (monorepo)",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "build": "pnpm -r --filter ./apps/* build",
+    "relay": "pnpm --filter @relay-learning/client relay",
+    "relay:watch": "pnpm --filter @relay-learning/client relay:watch",
+    "test": "pnpm -r --parallel test",
+    "test:ui": "pnpm --filter @relay-learning/client test:ui",
+    "type-check": "pnpm -r --parallel type-check",
+    "clean": "pnpm -r --parallel clean && pnpm -r exec rm -rf node_modules .turbo",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.1.0",
+    "turbo": "^1.10.0"
+  }
+}

@@ -1,0 +1,66 @@
+"""Exposes a URL that specifies the behavior of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behavior of this scalar."""
+  url: String!
+) on SCALAR
+
+"""
+Indicates exactly one field must be supplied and this field must not be `null`.
+"""
+directive @oneOf on INPUT_OBJECT
+
+type CreatePostPayload {
+  post: Post
+  error: String
+}
+
+type DeletePostPayload {
+  success: Boolean!
+  error: String
+}
+
+type Mutation {
+  createPost(title: String!, body: String!): CreatePostPayload!
+  deletePost(id: ID!): DeletePostPayload!
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  endCursor: String
+}
+
+type Post implements Node {
+  id: ID!
+  title: String!
+  body: String!
+  author: User!
+  createdAt: String!
+}
+
+type PostConnection {
+  edges: [PostEdge!]!
+  pageInfo: PageInfo!
+}
+
+type PostEdge {
+  cursor: String!
+  node: Post!
+}
+
+type Query {
+  node(id: ID!): Node
+  me: User
+  posts(first: Int = 10, after: String): PostConnection!
+}
+
+type User implements Node {
+  id: ID!
+  name: String!
+  email: String!
+  posts(first: Int = 10, after: String): PostConnection!
+}
+
