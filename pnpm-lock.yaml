@@ -69,6 +69,9 @@ importers:
       vitest:
         specifier: ^1.0.0
         version: 1.6.1(@types/node@20.19.29)
+      watchman:
+        specifier: ^1.0.0
+        version: 1.0.0
 
   apps/server:
     dependencies:
@@ -1617,6 +1620,10 @@ packages:
         optional: true
       jsdom:
         optional: true
+
+  watchman@1.0.0:
+    resolution: {integrity: sha512-f7sP6DSVQzNUAXIBctvYyJyq6/j/FtWoEn6yh/Ot/E14a3am7JMH0tygWt6iE+T+DT+BNOUAT3hM/gZ7W9Ycmw==}
+    deprecated: Package no longer supported. Contact support@npmjs.com for more info.
 
   webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
@@ -3173,6 +3180,8 @@ snapshots:
       - sugarss
       - supports-color
       - terser
+
+  watchman@1.0.0: {}
 
   webidl-conversions@3.0.1: {}
 
