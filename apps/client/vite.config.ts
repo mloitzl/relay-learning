@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [
     react({
       babel: {
-        plugins: ["babel-plugin-relay"],
+        plugins: ["relay"],
       },
     }),
   ],
