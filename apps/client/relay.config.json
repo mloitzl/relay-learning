@@ -1,6 +1,3 @@
-// This file is used to
-// - configure the Relay compiler for the client application, and
-// - and is used by the babel-plugin-relay to locate the Relay compiler settings. see: vite.config.ts
 {
   "src": "./src",
   "schema": "./schema.graphql",
