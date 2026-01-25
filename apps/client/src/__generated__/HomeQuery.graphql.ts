@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<9bd88dbaadec1d0f6894d4452acc3ea9>>
+ * @generated SignedSource<<b911c11efad979608c24d604fa704998>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,6 +13,7 @@ import { FragmentRefs } from "relay-runtime";
 export type HomeQuery$variables = Record<PropertyKey, never>;
 export type HomeQuery$data = {
   readonly me: {
+    readonly name: string;
     readonly posts: {
       readonly edges: ReadonlyArray<{
         readonly node: {
@@ -29,25 +30,25 @@ export type HomeQuery = {
 };
 
 const node: ConcreteRequest = (function(){
-var v0 = [
+var v0 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "name",
+  "storageKey": null
+},
+v1 = [
   {
     "kind": "Literal",
     "name": "first",
     "value": 5
   }
 ],
-v1 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "id",
-  "storageKey": null
-},
 v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "name",
+  "name": "id",
   "storageKey": null
 },
 v3 = {
@@ -72,6 +73,7 @@ return {
         "name": "me",
         "plural": false,
         "selections": [
+          (v0/*: any*/),
           {
             "args": null,
             "kind": "FragmentSpread",
@@ -79,7 +81,7 @@ return {
           },
           {
             "alias": null,
-            "args": (v0/*: any*/),
+            "args": (v1/*: any*/),
             "concreteType": "PostConnection",
             "kind": "LinkedField",
             "name": "posts",
@@ -136,12 +138,12 @@ return {
         "name": "me",
         "plural": false,
         "selections": [
-          (v1/*: any*/),
+          (v0/*: any*/),
           (v2/*: any*/),
           (v3/*: any*/),
           {
             "alias": null,
-            "args": (v0/*: any*/),
+            "args": (v1/*: any*/),
             "concreteType": "PostConnection",
             "kind": "LinkedField",
             "name": "posts",
@@ -163,14 +165,7 @@ return {
                     "name": "node",
                     "plural": false,
                     "selections": [
-                      (v1/*: any*/),
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "title",
-                        "storageKey": null
-                      },
+                      (v2/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -193,8 +188,8 @@ return {
                         "name": "author",
                         "plural": false,
                         "selections": [
-                          (v1/*: any*/),
                           (v2/*: any*/),
+                          (v0/*: any*/),
                           (v3/*: any*/)
                         ],
                         "storageKey": null
@@ -214,16 +209,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "dc2fc07481ae3ba187c369a2e99d4047",
+    "cacheID": "73e2f92d1e9fdecdd29906855f1b285b",
     "id": null,
     "metadata": {},
     "name": "HomeQuery",
     "operationKind": "query",
-    "text": "query HomeQuery {\n  me {\n    ...UserCard_user\n    posts(first: 5) {\n      edges {\n        node {\n          ...Post_post\n          id\n        }\n      }\n    }\n    id\n  }\n}\n\nfragment Post_post on Post {\n  id\n  title\n  body\n  createdAt\n  author {\n    ...UserCard_user\n    id\n  }\n}\n\nfragment UserCard_user on User {\n  id\n  name\n  email\n}\n"
+    "text": "query HomeQuery {\n  me {\n    name\n    ...UserCard_user\n    posts(first: 5) {\n      edges {\n        node {\n          ...Post_post\n          id\n        }\n      }\n    }\n    id\n  }\n}\n\nfragment Post_post on Post {\n  id\n  body\n  createdAt\n  author {\n    ...UserCard_user\n    id\n  }\n}\n\nfragment UserCard_user on User {\n  id\n  name\n  email\n}\n"
   }
 };
 })();
 
-(node as any).hash = "2c5aa1830a4f236c93afdaec054e3f31";
+(node as any).hash = "d5e3e9f895c27afc02a58ecfe49574ef";
 
 export default node;

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<195ae53f0efbb72aa55b79ad59e01dc8>>
+ * @generated SignedSource<<87a07647a17bb3f41c25975e5d1246ab>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -14,10 +14,10 @@ export type Post_post$data = {
   readonly author: {
     readonly " $fragmentSpreads": FragmentRefs<"UserCard_user">;
   };
-  readonly body: string;
+  readonly body?: string;
   readonly createdAt: string;
   readonly id: string;
-  readonly title: string;
+  readonly title?: string;
   readonly " $fragmentType": "Post_post";
 };
 export type Post_post$key = {
@@ -26,7 +26,13 @@ export type Post_post$key = {
 };
 
 const node: ReaderFragment = {
-  "argumentDefinitions": [],
+  "argumentDefinitions": [
+    {
+      "defaultValue": true,
+      "kind": "LocalArgument",
+      "name": "showDetails"
+    }
+  ],
   "kind": "Fragment",
   "metadata": null,
   "name": "Post_post",
@@ -39,18 +45,32 @@ const node: ReaderFragment = {
       "storageKey": null
     },
     {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "title",
-      "storageKey": null
+      "condition": "showDetails",
+      "kind": "Condition",
+      "passingValue": false,
+      "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "title",
+          "storageKey": null
+        }
+      ]
     },
     {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "body",
-      "storageKey": null
+      "condition": "showDetails",
+      "kind": "Condition",
+      "passingValue": true,
+      "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "body",
+          "storageKey": null
+        }
+      ]
     },
     {
       "alias": null,
@@ -80,6 +100,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "70504f9dd4bb3745d844015f440ebc50";
+(node as any).hash = "c978a21febe8fa05e322ee919efd1daa";
 
 export default node;

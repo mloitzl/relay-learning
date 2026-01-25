@@ -6,6 +6,7 @@ import { Post } from "../components/Post";
 const HomeQuery = graphql`
   query HomeQuery {
     me {
+      name
       ...UserCard_user
       posts(first: 5) {
         edges {
@@ -21,11 +22,12 @@ const HomeQuery = graphql`
 export function HomePage() {
   const queryRef = useLazyLoadQuery(HomeQuery, {});
   return (
-    <div>
+    <div style={{ maxWidth: "800px", margin: "0 auto", padding: "2rem" }}>
       <h1>Home Page</h1>
+      <h1>Welcome, {queryRef.me.name}</h1>
       <Suspense fallback={<div>Loading user data...</div>}>
         {/* @ts-expect-error Relay types */}
-        <UserCard user={queryRef.me} />
+        {/* <UserCard user={queryRef.me} /> */}
         <h2>Posts</h2>
         {queryRef.me.posts.edges.map(({ node }) => (
           <Post key={node.id} post={node} />

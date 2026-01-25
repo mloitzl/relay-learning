@@ -3,10 +3,11 @@ import type { Post_post$key } from "../__generated__/Post_post.graphql";
 import { UserCard } from "./UserCard";
 
 const PostFragment = graphql`
-  fragment Post_post on Post {
+  fragment Post_post on Post
+  @argumentDefinitions(showDetails: { type: "Boolean!", defaultValue: true }) {
     id
-    title
-    body
+    title @skip(if: $showDetails)
+    body @include(if: $showDetails)
     createdAt
     author {
       ...UserCard_user

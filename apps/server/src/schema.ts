@@ -58,20 +58,34 @@ export const schema = createSchema({
     }
   `,
   resolvers: {
+    Node: {
+      __resolveType: ({ id }) => {
+        const [type, pk] = id.split(":");
+        if (type === "user") return "User";
+        if (type === "post") return "Post";
+        return null;
+      },
+    },
     Query: {
       node: (_, { id }) => {
-        const [type, pk] = id.split(':');
-        if (type === 'user') return mockUsers.find(u => u.id === `user:${pk}`);
-        if (type === 'post') return mockPosts.find(p => p.id === `post:${pk}`);
+        const [type, pk] = id.split(":");
+        if (type === "user")
+          return mockUsers.find((u) => u.id === `user:${pk}`);
+        if (type === "post")
+          return mockPosts.find((p) => p.id === `post:${pk}`);
         return null;
       },
       me: () => mockUsers[0],
       posts: (_, { first = 10, after }) => {
-        const startIdx = after ? parseInt(Buffer.from(after, 'base64').toString()) : 0;
-        const edges = mockPosts.slice(startIdx, startIdx + first).map((post, idx) => ({
-          cursor: Buffer.from((startIdx + idx).toString()).toString('base64'),
-          node: post,
-        }));
+        const startIdx = after
+          ? parseInt(Buffer.from(after, "base64").toString())
+          : 0;
+        const edges = mockPosts
+          .slice(startIdx, startIdx + first)
+          .map((post, idx) => ({
+            cursor: Buffer.from((startIdx + idx).toString()).toString("base64"),
+            node: post,
+          }));
         return {
           edges,
           pageInfo: {
@@ -83,12 +97,16 @@ export const schema = createSchema({
     },
     User: {
       posts: (user, { first = 10, after }) => {
-        const userPosts = mockPosts.filter(p => p.author.id === user.id);
-        const startIdx = after ? parseInt(Buffer.from(after, 'base64').toString()) : 0;
-        const edges = userPosts.slice(startIdx, startIdx + first).map((post, idx) => ({
-          cursor: Buffer.from((startIdx + idx).toString()).toString('base64'),
-          node: post,
-        }));
+        const userPosts = mockPosts.filter((p) => p.author.id === user.id);
+        const startIdx = after
+          ? parseInt(Buffer.from(after, "base64").toString())
+          : 0;
+        const edges = userPosts
+          .slice(startIdx, startIdx + first)
+          .map((post, idx) => ({
+            cursor: Buffer.from((startIdx + idx).toString()).toString("base64"),
+            node: post,
+          }));
         return {
           edges,
           pageInfo: {
@@ -111,12 +129,12 @@ export const schema = createSchema({
         return { post, error: null };
       },
       deletePost: (_, { id }) => {
-        const idx = mockPosts.findIndex(p => p.id === id);
+        const idx = mockPosts.findIndex((p) => p.id === id);
         if (idx > -1) {
           mockPosts.splice(idx, 1);
           return { success: true, error: null };
         }
-        return { success: false, error: 'Not found' };
+        return { success: false, error: "Not found" };
       },
     },
   },
